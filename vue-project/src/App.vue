@@ -1,3 +1,10 @@
+<style>
+  @import "./index.css";
+</style>
+
 <template>
-<h1>Hello wørld</h1>
+    <div id="body-container">
+        <h1>Anne og Vilgeirs megafete Quizz</h1>
+        <router-view />
+    </div> 
 </template>
