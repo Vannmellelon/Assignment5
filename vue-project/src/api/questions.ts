@@ -4,14 +4,17 @@ import axios from "axios";
 const QUESTIONS_URL = "https://opentdb.com/api.php?amount=10";
 
 export interface QuestionsResponse {
-    result: Question[];
+    responseCode: number;
+	results: Question[];
 }
 
 export interface Question {
+	category: string;
     type: string; // "multiple" | "boolean"
+	difficulty: string;
     question: string;
-    correctAnswer: string;
-    incorrectAnswers: string[];
+    correct_answer: string;
+    incorrect_answers: string[];
 }
 
 export async function findAllQuestions(): Promise<[string | null, Question[]]> {
@@ -26,7 +29,7 @@ export async function findAllQuestions(): Promise<[string | null, Question[]]> {
 	// The actual HTTP request.
 	try {
 		const { data } = await axios.get<QuestionsResponse>(QUESTIONS_URL);
-		return [null, data.result]; // ??
+		return [null, data.results]; // ??
 	} catch (error: any) {
 		return [error.message, []];
 	}

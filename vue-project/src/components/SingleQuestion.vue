@@ -2,21 +2,36 @@
   @import "./singleQuestion.css";
 </style>
 
-<script>
+<script setup lang="ts">
+import type { PropType } from "vue";
+import type { Question } from "../api/questions";
+
+const props = defineProps({
+    questions: {
+        type: Array as PropType<Question[]>,
+        required: true
+    }
+});
+
 </script>
 
+
 <template>
-    <div id="question-container">
-        <p>Hvor mange hull i en dorull?</p>
-        <div id="all-buttons">
-            <div>
-                <button class="answer">Answer 1</button>
-                <button class="answer">Answer 2</button>
-            </div>
-            <div>
-                <button class="answer">Answer 3</button>
-                <button class="answer">Answer 4</button>
+<ul>
+    <li v-for="question in props.questions">
+        <div id="question-container">
+            <p>{{question.question}}</p>
+            <div id="all-buttons">
+                <div id="tf-buttons">
+                    <button class="answer">{{question.correct_answer}}</button>
+                    <button class="answer">{{question.incorrect_answers[0]}}</button>
+                </div>
+                   <div v-if="question.type == 'multiple'">
+                    <button class="answer">{{question.incorrect_answers[1]}}</button>
+                    <button class="answer">{{question.incorrect_answers[2]}}</button>
+                </div>
             </div>
         </div>
-    </div>
+    </li>
+</ul>
 </template>

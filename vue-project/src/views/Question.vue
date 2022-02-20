@@ -14,6 +14,7 @@ onMounted(async () => {
     const [_error, _questions] = await findAllQuestions();
     store.commit("setQuestions", _questions);
     error.value = _error;
+    console.log(error.value);
 });
 
 
@@ -21,7 +22,7 @@ onMounted(async () => {
 
 <template>
     <p>QuestionPage</p>
-    <SingleQuestion />
+    <SingleQuestion :questions="questions" />
     <router-link to="/results">
         <Button>Show results</Button>                
     </router-link>
