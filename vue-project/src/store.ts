@@ -4,7 +4,6 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 import type { Category } from "./api/categories";
 import type { Question } from "./api/questions";
 import type { User } from "./api/users"
-import type { UserInput } from "./views/Start.vue";
 
 export interface State {
     questions: Question[];
@@ -13,6 +12,7 @@ export interface State {
     username: string;
     userCategory: string;
     userDifficulty: string;
+    userAnswers: string[];
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
@@ -26,10 +26,11 @@ export default createStore({
             highScore: 0,
         },
         categories: [],
-        // is this necessary?
+        // for testing
         username: "dewaldels",
         userCategory: "",
         userDifficulty: "",
+        userAnswers: [],
 
     }, 
     mutations: {
@@ -51,6 +52,15 @@ export default createStore({
         setUserDifficulty: (state: State, payload: string) => {
             state.userDifficulty = payload;
         },
+        setUserAnswer: (state: State, payload: any[]) => {
+            const [ans, inpQ] = payload;
+            for (const stateQ of state.questions) {
+				if (stateQ.question === inpQ) {
+					stateQ.userAnswer = ans;
+					break;
+				}
+			}
+        }
     },
     getters: {
 

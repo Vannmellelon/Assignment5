@@ -3,7 +3,8 @@ import { useStore } from "vuex";
 import { computed, onMounted, ref, type PropType, type Ref } from "vue";
 
 const store = useStore();
-const username:username = computed(() => store.state.username);
+const username:string = computed(() => store.state.username);
+const id:number = computed(() => store.state.id);
 const error = ref<string | null>(null);
 
 const user = 'dewaldels'
@@ -48,9 +49,9 @@ export async function registrerUser(username: string, highScore: number) {
 	}
 }
 
-const userId = 1;
+//const userId = 1;
 
-export async function updateHighScore(highScore: number) {
+export async function updateHighScore(highScore: number, userId: number) {
 	try {
 		const config = {
 			method: "POST",
