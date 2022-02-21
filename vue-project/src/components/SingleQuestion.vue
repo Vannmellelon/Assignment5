@@ -17,9 +17,8 @@ const props = defineProps({
 
 
 <template>
-<ul>
-    <li v-for="question in props.questions">
-        <div id="question-container">
+<ul> 
+        <div id="question-container" v-for="question in props.questions">
             <p>{{question.question}}</p>
             <div id="all-buttons">
                 <div id="tf-buttons">
@@ -32,6 +31,5 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-    </li>
 </ul>
 </template>

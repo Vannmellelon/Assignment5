@@ -8,7 +8,7 @@ import SingleQuestion from "../components/SingleQuestion.vue";
 const store = useStore();
 
 const questions:Question[] = computed(() => store.state.questions);
-const error = ref<string | null>(null);
+const error = ref<string | null>(null); //???
 
 onMounted(async () => {
     const [_error, _questions] = await findAllQuestions();
@@ -21,7 +21,6 @@ onMounted(async () => {
 </script>
 
 <template>
-    <p>QuestionPage</p>
     <SingleQuestion :questions="questions" />
     <router-link to="/results">
         <Button>Show results</Button>                
