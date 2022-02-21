@@ -39,17 +39,11 @@ const updateHighScoreClick = async () => {
     console.log("ERR", error)
     console.log("USER", user)
 }
-/*
-const ui: UserInput = {
-    username: ref("Username"),
-    userCategory: ref("Category"),
-    userDifficulty: ref("Difficulty")
-}
-*/
 // user-input variables, v-model binds input to these
 
 // TODO: make onclick for button that swooshes ui to state
 // OR hook to lifecycle event?
+
 </script>
 <template>
     <div id="start-container">

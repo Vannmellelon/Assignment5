@@ -1,7 +1,9 @@
 import axios from "axios";
-// import { MOCK_QUESTIONS } from "";
+import store from "@/store";
 
 const QUESTIONS_URL = "https://opentdb.com/api.php?amount=10";
+const DIFFICULTY_FRAGMENT = "&difficulty=";
+const CATEGORY_FRAGMENT = "&category="
 
 export interface QuestionsResponse {
     responseCode: number;
@@ -29,6 +31,10 @@ export async function findAllQuestions(): Promise<[string | null, Question[]]> {
     */
 	// The actual HTTP request.
 	try {
+		console.log("user cat", store.getters.getUserCategory);
+		const catId = store.getters.getCategoryId(store.getters.getUserCategory);
+		console.log("cat id", catId)
+		const CONCAT_URL = QUESTIONS_URL;
 		const { data } = await axios.get<QuestionsResponse>(QUESTIONS_URL);
 		return [null, data.results]; // ??
 	} catch (error: any) {
