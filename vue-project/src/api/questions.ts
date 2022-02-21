@@ -15,6 +15,7 @@ export interface Question {
     question: string;
     correct_answer: string;
     incorrect_answers: string[];
+	userAnswer: string;
 }
 
 export async function findAllQuestions(): Promise<[string | null, Question[]]> {

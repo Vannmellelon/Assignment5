@@ -3,18 +3,13 @@ import { computed, onMounted, ref, type PropType, type Ref } from "vue";
 import { useStore } from "vuex";
 import { findAllCategories, type Category } from "../api/categories"; 
 import { getUser, type User, registrerUser, updateHighScore } from "../api/users";
-/*
-export interface UserInput {
-    username: Ref<string>;
-    userCategory: Ref<string>;
-    userDifficulty: Ref<string>;
-}
-*/
+
+
 // store
 const store = useStore();
 const categories:Category[] = computed(() => store.state.categories);
 const user:User = computed(() => store.state.user);
-const error = ref<string | null>(null); //???
+const error = ref<string | null>(null); 
 
 const username:Ref<string> = ref("");
 const userCategory:Ref<string> = ref("");
@@ -48,7 +43,7 @@ const onRegistrerClick = async () => {
 }
 
 const updateHighScoreClick = async () => {
-    const [error, user ] = await updateHighScore(100)
+    const [error, user ] = await updateHighScore(100, 1)
     console.log("ERR", error)
     console.log("USER", user)
 }
