@@ -66,3 +66,13 @@
     width: 19rem;
     height: 5rem;
 }
+
+#enabled {
+    transition-duration: .3s; 
+}
+
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;       
+    transition-duration: .3s; 
+ }

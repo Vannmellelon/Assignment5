@@ -27,7 +27,7 @@ export default createStore({
         },
         categories: [],
         // is this necessary?
-        username: "dewaldels",
+        username: "",
         userCategory: "",
         userDifficulty: "",
 

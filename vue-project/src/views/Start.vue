@@ -18,7 +18,9 @@ const error = ref<string | null>(null); //???
 
 const username:Ref<string> = ref("");
 const userCategory:Ref<string> = ref("");
-const userDifficulty:Ref<string> = ref("easy");
+const userDifficulty:Ref<string> = ref("mixed");
+const displayError = ref("")
+
 
 onMounted(async () => {
     const [_error, _categories] = await findAllCategories();
@@ -26,15 +28,21 @@ onMounted(async () => {
     error.value = _error;
     console.log(error.value);
 });
-onMounted(async () => {
+/* onMounted(async () => {
     const [_error, _users] = await getUser();
     store.commit("setUsers", _users);
     error.value = _error;
     console.log(error.value);
-});
+}); */
 
 const onRegistrerClick = async () => {
-    const [error, user ] = await registrerUser(username.value, 0)
+    const [error, existsingUser ] = await getUser(username.value)
+    if (existsingUser) {
+        
+    } else {
+        const [error, existsingUser ] = await registrerUser(username.value, 0)
+        
+    }
     console.log("ERR", error)
     console.log("USER", user)
 }
@@ -44,6 +52,16 @@ const updateHighScoreClick = async () => {
     console.log("ERR", error)
     console.log("USER", user)
 }
+
+const isActive = () => {
+    if (username.value.length > 0) {
+        return false
+    } else {
+        return true
+    }
+}
+
+console.log(isActive())
 /*
 const ui: UserInput = {
     username: ref("Username"),
@@ -61,16 +79,15 @@ const ui: UserInput = {
         <div id="play-container">
             <h1>Vilgeir & Annes Spectacular Quiz</h1>
         <form id="input-form">
-            
-                <input id="user-input" type="text" v-model="username" placeholder="User">
-                <!-- <button @click="onRegistrerClick" type="button">registrer</button> -->
-            
-            
+            <input id="user-input" type="text" v-model="username" v-on:input="isActive" placeholder="Enter user" >
+            <!-- <button @click="onRegistrerClick" type="button">registrer</button> -->
             <select id="category-select" v-model="userCategory">
                     <option value="" selected disabled>Select a category</option>
                     <option v-for="category in categories">{{category.name}}</option>
             </select>
             <div id="difficulty-lvl">
+                <input type="radio" v-model="userDifficulty" id="mixed" name="difficulty-lvl" value="mixed">
+                <label for="easy">Mixed</label>
                 <input type="radio" v-model="userDifficulty" id="easy" name="difficulty-lvl" value="easy">
                 <label for="easy">Easy</label>
                 <input type="radio" v-model="userDifficulty" id="medium" name="difficulty-lvl" value="medium">
@@ -82,10 +99,10 @@ const ui: UserInput = {
                 <p>Difficulty level: {{userDifficulty}}</p>
             </div>
         </form>
-        
-        <router-link to="/questions"> 
-            <Button id="play-button">Play Now</Button>
-        </router-link>
+        <router-link id="enabled" v-bind:class="{ disabled: isActive() }" to="/questions"> 
+            <Button id="play-button" @click="onRegistrerClick" type="button">Play Now
+            </Button>
+        </router-link>       
     </div>
     </div>
 </template>

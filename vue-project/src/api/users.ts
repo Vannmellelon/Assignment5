@@ -1,13 +1,6 @@
 import axios from "axios";
-import { useStore } from "vuex";
-import { computed, onMounted, ref, type PropType, type Ref } from "vue";
 
-const store = useStore();
-const username:username = computed(() => store.state.username);
-const error = ref<string | null>(null);
-
-const user = 'dewaldels'
-const apiURL = `https://new-cool-quiz.herokuapp.com/trivia?username=${user}`
+const apiURL = `https://new-cool-quiz.herokuapp.com/trivia`
 const apiKey = "54321";
 
 
@@ -17,10 +10,10 @@ export interface User {
     highScore: number;
 }
 
-export async function getUser(): Promise<[string | null, User]> {
+export async function getUser(username: string): Promise<[string | null, User | undefined]> {
 	try {
-		const { data } = await axios.get<User>(apiURL);
-		return [null, data]; // ??
+		const { data } = await axios.get<User[]>(apiURL + "?username=" + username);
+		return [null, data.pop()]; // ??
 	} catch (error: any) {
 		return [error.message, undefined];
 	}
@@ -39,7 +32,7 @@ export async function registrerUser(username: string, highScore: number) {
 				highScore: highScore
 			})
 		}
-		const response = await fetch("https://new-cool-quiz.herokuapp.com/trivia", config)
+		const response = await fetch(apiURL, config)
 		const { data } = await response.json()
 		return [ null, data ]
 	}
