@@ -26,8 +26,8 @@ export default createStore({
             highScore: 0,
         },
         categories: [],
-        // for testing
-        username: "dewaldels",
+        // is this necessary?
+        username: "",
         userCategory: "",
         userDifficulty: "",
         userAnswers: [],

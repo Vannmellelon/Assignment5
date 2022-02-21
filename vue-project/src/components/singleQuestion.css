@@ -29,7 +29,11 @@
 }
 
 .answer:hover {
-    
     background-color: #4CAF50;
     color: white
+}
+
+.answer::after {
+    content:"";
+    background-color: #4CAF50;
 }
