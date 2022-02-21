@@ -8,7 +8,8 @@ export interface CategoriesResponse {
 }
 
 export interface Category {
-     name: string
+    id: number;
+     name: string;
 }
 
 export async function findAllCategories(): Promise<[string | null, Category[]]> {

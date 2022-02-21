@@ -19,6 +19,7 @@ const store = useStore();
 
 function funcClickQuestion(ans:string, que:Question) {
     store.commit("setUserAnswer", [ans, que.question]);
+    // TODO make unclickable/greyed out
 }
 </script>
 
