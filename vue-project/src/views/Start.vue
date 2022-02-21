@@ -8,13 +8,11 @@ import { getUser, type User, registrerUser, updateHighScore } from "../api/users
 // store
 const store = useStore();
 const categories:Category[] = computed(() => store.state.categories);
-const user:User = computed(() => store.state.user);
 const error = ref<string | null>(null); 
 
 const username:Ref<string> = ref("");
 const userCategory:Ref<string> = ref("");
 const userDifficulty:Ref<string> = ref("mixed");
-const displayError = ref("")
 
 
 onMounted(async () => {
@@ -33,13 +31,13 @@ onMounted(async () => {
 const onRegistrerClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
     if (existsingUser) {
-        
     } else {
         const [error, existsingUser ] = await registrerUser(username.value, 0)
         
     }
     console.log("ERR", error)
-    console.log("USER", user)
+    store.commit("setUserCategory", userCategory.value);
+    store.commit("setUserDifficulty", userDifficulty.value);
 }
 
 const updateHighScoreClick = async () => {
@@ -56,14 +54,8 @@ const isActive = () => {
     }
 }
 
-console.log(isActive())
-/*
-const ui: UserInput = {
-    username: ref("Username"),
-    userCategory: ref("Category"),
-    userDifficulty: ref("Difficulty")
-}
-*/
+console.log("is active",isActive());
+
 // user-input variables, v-model binds input to these
 
 // TODO: make onclick for button that swooshes ui to state
