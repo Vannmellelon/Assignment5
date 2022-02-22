@@ -62,9 +62,10 @@ export default createStore({
         }
     },
     getters: {
-        // Get the id of a category based on the category name:string
-        getCategoryId: (state: State) => (category: string) => {
-                return state.categories.find(cat => cat.name === category)?.id;
+        // Get the id of the user's selected category
+        getUserCategoryId: (state: State) => {
+            if (state.userCategory === "") { return -1;}
+            else{ return state.categories.find(cat => cat.name === state.userCategory)?.id;}
         },
         getUserCategory: (state: State) => {
             return state.userCategory;
@@ -72,6 +73,7 @@ export default createStore({
         getUserDifficulty: (state: State) => {
             return state.userDifficulty;
         },
+        // Calculates score based on user's answer in question objects
         getScore: (state: State) => {
             // rewrite to reduce?
             let score = 0;

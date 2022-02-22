@@ -19,10 +19,10 @@ const props = defineProps({
 </script>
 
 <template>
-    <ul> 
-        <div id="score-disp">
-            <p>Your score: {{score}}</p>
-        </div>
+    <div id="score-disp">
+        <p>Your score: {{score}}</p>
+    </div>
+    <ul>
         <div id="question-container" v-for="question in props.questions">
             <p>{{question.question}}</p>
             <div id="all-buttons">
