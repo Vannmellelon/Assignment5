@@ -1,5 +1,5 @@
 <style>
-  @import "./singleQuestion.css";
+  @import "./components.css";
 </style>
 
 <script setup lang="ts">
@@ -16,6 +16,7 @@ const props = defineProps({
         required: true
     }
 });
+
 </script>
 
 <template>
@@ -24,7 +25,7 @@ const props = defineProps({
     </div>
     <ul>
         <div id="question-container" v-for="question in props.questions">
-            <p>{{question.question}}</p>
+            <h2>{{question.question}}</h2>
             <div id="all-buttons">
                 <div id="tf-buttons">
                     <p class="answer" 

@@ -4,6 +4,7 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 import type { Category } from "./api/categories";
 import type { Question } from "./api/questions";
 import type { User } from "./api/users"
+import UserBarVue from "./components/UserBar.vue";
 
 export interface State {
     questions: Question[];
@@ -83,6 +84,9 @@ export default createStore({
                 }
             }
             return score;
+        },
+        getUserId: (state: State) => {
+            return state.user.id;
         }
     },
 });

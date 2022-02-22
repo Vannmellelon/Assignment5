@@ -2,13 +2,16 @@
 import { useStore } from 'vuex';
 import { computed, onMounted, ref, type ComputedRef } from "vue";
 import { findAllQuestions, type Question } from "../api/questions";
-import SingleQuestion from "../components/SingleQuestion.vue";
+import Questions from "../components/Questions.vue";
+import { updateHighScore } from '@/api/users';
 
 // store greier
 const store = useStore();
 
 const questions:ComputedRef<Question[]> = computed(() => store.state.questions);
-const error = ref<string | null>(null); //???
+const score:ComputedRef<number> = computed(() => store.getters.getScore);
+const userId:ComputedRef<number> = computed(() => store.getters.getUserId);
+const error = ref<string | null>(null);
 
 onMounted(async () => {
     const [_error, _questions] = await findAllQuestions();
@@ -17,12 +20,16 @@ onMounted(async () => {
     console.log(error.value);
 });
 
-
+const updateHighScoreClick = async () => {
+    const [error, user ] = await updateHighScore(score.value, userId.value);
+    console.log("ERR", error)
+    console.log("USER", user)
+}
 </script>
 
 <template>
-    <SingleQuestion :questions="questions" />
+    <Questions :questions="questions" />
     <router-link to="/results">
-        <Button>Show results</Button>                
+        <Button @click="updateHighScoreClick">Show results</Button>                
     </router-link>
 </template>

@@ -1,5 +1,5 @@
 <style>
-  @import "./singleQuestion.css";
+  @import "./components.css";
 </style>
 
 <script setup lang="ts">
@@ -19,8 +19,13 @@ const store = useStore();
 
 function funcClickQuestion(ans:string, que:Question) {
     store.commit("setUserAnswer", [ans, que.question]);
-    // TODO make unclickable/greyed out
 }
+
+// TODO (in api/question.ts)
+// scramble the questions, so that the first one is not always the correct one
+// add array to question object, allAnswers, sort this
+// use allAnswers to display answers instead
+// user's answer still get's saved and checked against correct answer, so it should not be too troublesome to implement
 </script>
 
 <template>

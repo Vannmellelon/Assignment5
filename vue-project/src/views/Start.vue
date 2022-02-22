@@ -23,6 +23,7 @@ onMounted(async () => {
     console.log(error.value);
 });
 
+// Registers the user in the trivia API
 const onRegistrerClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
     if (!existsingUser) {
@@ -31,27 +32,13 @@ const onRegistrerClick = async () => {
     onLoginClick()
 }
 
+// Helper func for onRegisterClick
+// TODO, combine them somehow. it works for now
 const onLoginClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
     store.commit("setUsers", existsingUser);
 }
 
-/* const onRegistrerClick = async () => {
-    const [error, existsingUser ] = await getUser(username.value)
-    if (existsingUser) {
-        store.commit("setUsers", existsingUser);
-    } else {
-        const [error, newUser ] = await registrerUser(username.value, 0)
-        store.commit("setUsers", newUser);
-        console.log(newUser)
-    }
-} */
-
-const updateHighScoreClick = async () => {
-    const [error, user ] = await updateHighScore(100, 1)
-    console.log("ERR", error)
-    console.log("USER", user)
-}
 
 // CCS stuff
 const isActive = () => {
@@ -64,17 +51,17 @@ const isActive = () => {
 
 console.log("is active",isActive());
 
+// onchange for user-selected category
 const onChangeCategory = () => {
     console.log("CLICK, commiting category to store");
     store.commit("setUserCategory", userCategory.value);
 }
 
+// onchange for user-selected difficulty
 const onChangeDifficulty = () => {
     console.log("CLICK, commiting difficulty to store");
     store.commit("setUserDifficulty", userDifficulty.value);
 }
-
-// TODO: make onclick for button that swooshes ui to state
 
 </script>
 <template>
