@@ -25,16 +25,40 @@ function funcClickQuestion(ans:string, que:Question) {
 
 <template>
     <ul> 
-        <div id="question-container" v-for="question in props.questions">
+        <div id="question-container" 
+        v-for="question in props.questions"
+        :key="question.question">
             <p>{{question.question}}</p>
             <div id="all-buttons">
                 <div id="tf-buttons">
-                    <button class="answer" v-on:click="funcClickQuestion(question.correct_answer, question)" >{{question.correct_answer}}</button>
-                    <button class="answer" v-on:click="funcClickQuestion(question.incorrect_answers[0], question)">{{question.incorrect_answers[0]}}</button>
+                    <label class="answer" >
+                    {{question.correct_answer}}
+                        <input type="radio" name={{question.question}}
+                            id="{{question.correct_answer}}" 
+                            v-on:click="funcClickQuestion(question.correct_answer, question)" >
+                    </label>
+                    
+                    <label class="answer" for="{{question.correct_answer}}">
+                    {{question.incorrect_answers[0]}}         
+                        <input type="radio" name="{{question.question}}" 
+                            id="{{question.incorrect_answers[0]}}" 
+                            v-on:click="funcClickQuestion(question.incorrect_answers[0], question)" >
+                    </label> 
                 </div>
-                <div v-if="question.type == 'multiple'">
-                    <button class="answer" v-on:click="funcClickQuestion(question.incorrect_answers[1], question)">{{question.incorrect_answers[1]}}</button>
-                    <button class="answer" v-on:click="funcClickQuestion(question.incorrect_answers[2], question)">{{question.incorrect_answers[2]}}</button>
+                <!-- Only if multiple choice -->
+                <div id="mc-buttons" 
+                v-if="question.type == 'multiple'">
+                    <label class="answer" for="{{question.correct_answer}}">{{question.incorrect_answers[1]}}
+                        <input type="radio" name="{{question.question}}" 
+                            id="{{question.incorrect_answers[1]}}" 
+                            v-on:click="funcClickQuestion(question.incorrect_answers[1], question)" >
+                    </label>
+
+                    <label class="answer" for="{{question.correct_answer}}">{{question.incorrect_answers[2]}}
+                        <input type="radio" name="{{question.question}}" 
+                        id="{{question.incorrect_answers[2]}}" 
+                        v-on:click="funcClickQuestion(question.incorrect_answers[2], question)" >
+                    </label>
                 </div>
             </div>
         </div>
