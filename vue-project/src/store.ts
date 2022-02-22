@@ -9,7 +9,7 @@ export interface State {
     questions: Question[];
     categories: Category[];
     user: User;
-    username: string;
+    //username: string;
     userCategory: string;
     userDifficulty: string;
 }
@@ -26,7 +26,7 @@ export default createStore({
         },
         categories: [],
         // is this necessary?
-        username: "",
+        //username: "",
         userCategory: "",
         userDifficulty: "",
     }, 
@@ -41,7 +41,7 @@ export default createStore({
             state.categories = [...payload];
         },
         setUsername: (state: State, payload: string) => {
-            state.username = payload;
+            state.user.username = payload;
         },
         setUserCategory: (state: State, payload: string) => {
             state.userCategory = payload;
@@ -49,6 +49,8 @@ export default createStore({
         setUserDifficulty: (state: State, payload: string) => {
             state.userDifficulty = payload;
         },
+        // Locates current question in store
+        // Inserts the user's answer into that question object
         setUserAnswer: (state: State, payload: any[]) => {
             const [ans, inpQ] = payload;
             for (const stateQ of state.questions) {
@@ -60,16 +62,28 @@ export default createStore({
         }
     },
     getters: {
-        getCategoryId: (state: State) => (category: string) => {
-                return state.categories.find(cat => cat.name === category)?.id;
+        // Get the id of the user's selected category
+        getUserCategoryId: (state: State) => {
+            if (state.userCategory === "") { return -1;}
+            else{ return state.categories.find(cat => cat.name === state.userCategory)?.id;}
         },
         getUserCategory: (state: State) => {
             return state.userCategory;
         },
         getUserDifficulty: (state: State) => {
             return state.userDifficulty;
+        },
+        // Calculates score based on user's answer in question objects
+        getScore: (state: State) => {
+            // rewrite to reduce?
+            let score = 0;
+            for (const q of state.questions) {
+                if (q.userAnswer == q.correct_answer) {
+                    score += 10;
+                }
+            }
+            return score;
         }
-
     },
 });
 

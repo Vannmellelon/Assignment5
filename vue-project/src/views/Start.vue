@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, type PropType, type Ref } from "vue";
+import { computed, onMounted, ref, type ComputedRef, type PropType, type Ref } from "vue";
 import { useStore } from "vuex";
 import { findAllCategories, type Category } from "../api/categories"; 
 import { getUser, type User, registrerUser, updateHighScore } from "../api/users";
@@ -7,9 +7,10 @@ import { getUser, type User, registrerUser, updateHighScore } from "../api/users
 
 // store
 const store = useStore();
-const categories:Category[] = computed(() => store.state.categories);
+const categories:ComputedRef<Category[]> = computed(() => store.state.categories);
 const error = ref<string | null>(null); 
 
+// user-input variables, v-model binds input to these
 const username:Ref<string> = ref("");
 const userCategory:Ref<string> = ref("");
 const userDifficulty:Ref<string> = ref("mixed");
@@ -21,26 +22,18 @@ onMounted(async () => {
     error.value = _error;
     console.log(error.value);
 });
-/* onMounted(async () => {
-    const [_error, _users] = await getUser();
-    store.commit("setUsers", _users);
-    error.value = _error;
-    console.log(error.value);
-}); */
 
 const onRegistrerClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
     if (!existsingUser) {
         const [error, newUser ] = await registrerUser(username.value, 0)
-    }    
+    }
     onLoginClick()
 }
 
 const onLoginClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
     store.commit("setUsers", existsingUser);
-    store.commit("setUserCategory", userCategory.value);
-    store.commit("setUserDifficulty", userDifficulty.value);
 }
 
 /* const onRegistrerClick = async () => {
@@ -60,6 +53,7 @@ const updateHighScoreClick = async () => {
     console.log("USER", user)
 }
 
+// CCS stuff
 const isActive = () => {
     if (username.value.length > 0) {
         return false
@@ -70,10 +64,17 @@ const isActive = () => {
 
 console.log("is active",isActive());
 
-// user-input variables, v-model binds input to these
+const onChangeCategory = () => {
+    console.log("CLICK, commiting category to store");
+    store.commit("setUserCategory", userCategory.value);
+}
+
+const onChangeDifficulty = () => {
+    console.log("CLICK, commiting difficulty to store");
+    store.commit("setUserDifficulty", userDifficulty.value);
+}
 
 // TODO: make onclick for button that swooshes ui to state
-// OR hook to lifecycle event?
 
 </script>
 <template>
@@ -83,18 +84,18 @@ console.log("is active",isActive());
         <form id="input-form">
             <input id="user-input" type="text" v-model="username" v-on:input="isActive" placeholder="Enter user" >
             <!-- <button @click="onRegistrerClick" type="button">registrer</button> -->
-            <select id="category-select" v-model="userCategory">
+            <select id="category-select" v-model="userCategory" @change="onChangeCategory">
                     <option value="" selected disabled>Select a category</option>
                     <option v-for="category in categories">{{category.name}}</option>
             </select>
             <div id="difficulty-lvl">
-                <input type="radio" v-model="userDifficulty" id="mixed" name="difficulty-lvl" value="mixed">
+                <input type="radio" v-model="userDifficulty" id="mixed" name="difficulty-lvl" value="" @change="onChangeDifficulty">
                 <label for="easy">Mixed</label>
-                <input type="radio" v-model="userDifficulty" id="easy" name="difficulty-lvl" value="easy">
+                <input type="radio" v-model="userDifficulty" id="easy" name="difficulty-lvl" value="easy" @change="onChangeDifficulty">
                 <label for="easy">Easy</label>
-                <input type="radio" v-model="userDifficulty" id="medium" name="difficulty-lvl" value="medium">
+                <input type="radio" v-model="userDifficulty" id="medium" name="difficulty-lvl" value="medium" @change="onChangeDifficulty">
                 <label for="medium">Medium</label>
-                <input type="radio" v-model="userDifficulty" id="hard" name="difficulty-lvl" value="hard">
+                <input type="radio" v-model="userDifficulty" id="hard" name="difficulty-lvl" value="hard" @change="onChangeDifficulty">
                 <label for="hard">Hard</label>
             </div>
             <div id="disp-user-settings">
