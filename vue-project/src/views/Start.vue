@@ -30,15 +30,29 @@ onMounted(async () => {
 
 const onRegistrerClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
-    if (existsingUser) {
-    } else {
-        const [error, existsingUser ] = await registrerUser(username.value, 0)
-        
-    }
-    console.log("ERR", error)
+    if (!existsingUser) {
+        const [error, newUser ] = await registrerUser(username.value, 0)
+    }    
+    onLoginClick()
+}
+
+const onLoginClick = async () => {
+    const [error, existsingUser ] = await getUser(username.value)
+    store.commit("setUsers", existsingUser);
     store.commit("setUserCategory", userCategory.value);
     store.commit("setUserDifficulty", userDifficulty.value);
 }
+
+/* const onRegistrerClick = async () => {
+    const [error, existsingUser ] = await getUser(username.value)
+    if (existsingUser) {
+        store.commit("setUsers", existsingUser);
+    } else {
+        const [error, newUser ] = await registrerUser(username.value, 0)
+        store.commit("setUsers", newUser);
+        console.log(newUser)
+    }
+} */
 
 const updateHighScoreClick = async () => {
     const [error, user ] = await updateHighScore(100, 1)
@@ -91,6 +105,6 @@ console.log("is active",isActive());
             <Button id="play-button" @click="onRegistrerClick" type="button">Play Now
             </Button>
         </router-link>       
-    </div>
+        </div>
     </div>
 </template>

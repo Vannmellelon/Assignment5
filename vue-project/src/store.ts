@@ -12,7 +12,6 @@ export interface State {
     username: string;
     userCategory: string;
     userDifficulty: string;
-    userAnswers: string[];
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
@@ -30,8 +29,6 @@ export default createStore({
         username: "",
         userCategory: "",
         userDifficulty: "",
-        userAnswers: [],
-
     }, 
     mutations: {
         setQuestions: (state: State, payload: Question[]) => {
