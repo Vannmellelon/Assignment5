@@ -21,6 +21,6 @@ onMounted(async () => {
 <template>
     <Questions :questions="questions" />
     <router-link to="/results">
-        <Button>Show results</Button>                
+        <Button class="big-button" id="result-button">Show results</Button>                
     </router-link>
 </template>

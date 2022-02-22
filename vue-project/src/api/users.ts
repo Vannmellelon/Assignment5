@@ -46,7 +46,7 @@ export async function registrerUser(username: string, highScore: number) {
 export async function updateHighScore(highScore: number, userId: number) {
 	try {
 		const config = {
-			method: "POST",
+			method: "PATCH",
 			headers: {
 				"X-API-KEY": apiKey,
 				"Content-Type": "application/json"
