@@ -1,7 +1,21 @@
+<script lang="ts" setup>
+import { computed, onMounted, ref } from "vue";
+import type { Question } from "../api/questions";
+import { useStore } from "vuex";
+import Results from "../components/Results.vue";
+
+const store = useStore();
+
+const questions:Question[] = computed(() => store.state.questions);
+</script>
+
 <template>
-    <p>ResultPage</p>
-   
+    <h1>RESULTS</h1>
+    <!-- <div v-for="question in questions">
+        <p> {{question.correct_answer}} </p>
+    </div> -->
+    <Results :questions="questions" />
     <router-link to="/">
-        <span>Back to start</span>
+        <Button>Try again!</Button>
     </router-link>
 </template>
