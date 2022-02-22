@@ -82,6 +82,12 @@ export default createStore({
         },
         getUserId: (state: State) => {
             return state.user.id;
+        },
+        getUsername: (state: State) => {
+            return state.user.username;
+        },
+        getHighscore: (state: State) => {
+            return state.user.highScore;
         }
     },
 });

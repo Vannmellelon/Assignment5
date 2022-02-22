@@ -14,14 +14,24 @@ const props = defineProps({
     score: {
         type:Number,
         required: true
-    }
+    },
+    highScore: {
+        type:Number,
+        required: true
+    },
+    username: {
+        type:String,
+        required: true
+    },
 });
 
 </script>
 
 <template>
     <div id="score-disp">
-        <h1>Your score: {{score}}</h1>
+        <h1>Hi {{username}}! </h1>
+        <h1>Your previous high score: {{highScore}}</h1>
+        <h1>Your current score: {{score}}</h1>
     </div>
     <ul>
         <div id="question-container" v-for="question in props.questions">

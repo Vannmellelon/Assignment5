@@ -8,11 +8,20 @@ const store = useStore();
 
 const questions:ComputedRef<Question[]> = computed(() => store.state.questions);
 const score:ComputedRef<number> = computed(() => store.getters.getScore);
+const highScore:ComputedRef<number> = computed(() => store.getters.getHighscore);
+const username:ComputedRef<string> = computed(() => store.getters.getUsername);
 </script>
 
 <template>
     <h1>RESULTS</h1>
-    <Results :questions="questions" :score="score" />
+    <!-- <div v-for="question in questions">
+        <p> {{question.correct_answer}} </p>
+    </div> -->
+    <Results 
+    :questions="questions" 
+    :score="score" 
+    :highScore="highScore"
+    :username="username" />
     <div id="result-buttons">
         <router-link to="/questions">
             <Button class="big-button" id="result-button">Play again</Button>
