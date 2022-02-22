@@ -16,7 +16,7 @@ This application was developed as a part of the .NET Fullstack course at Noroff 
 ## Usage
 
 
-[Click here](url) to play!
+[Click here](https://fathomless-brook-76793.herokuapp.com/) to play!
 
 
 ## Maintainers
