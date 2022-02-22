@@ -8,7 +8,6 @@ import { getUser, type User, registrerUser, updateHighScore } from "../api/users
 // store
 const store = useStore();
 const categories:Category[] = computed(() => store.state.categories);
-const user:User = computed(() => store.state.user);
 const error = ref<string | null>(null); 
 
 const username:Ref<string> = ref("");
@@ -40,6 +39,8 @@ const onRegistrerClick = async () => {
 const onLoginClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
     store.commit("setUsers", existsingUser);
+    store.commit("setUserCategory", userCategory.value);
+    store.commit("setUserDifficulty", userDifficulty.value);
 }
 
 /* const onRegistrerClick = async () => {
@@ -67,18 +68,13 @@ const isActive = () => {
     }
 }
 
-console.log(isActive())
-/*
-const ui: UserInput = {
-    username: ref("Username"),
-    userCategory: ref("Category"),
-    userDifficulty: ref("Difficulty")
-}
-*/
+console.log("is active",isActive());
+
 // user-input variables, v-model binds input to these
 
 // TODO: make onclick for button that swooshes ui to state
 // OR hook to lifecycle event?
+
 </script>
 <template>
     <div id="start-container">

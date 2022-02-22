@@ -60,6 +60,15 @@ export default createStore({
         }
     },
     getters: {
+        getCategoryId: (state: State) => (category: string) => {
+                return state.categories.find(cat => cat.name === category)?.id;
+        },
+        getUserCategory: (state: State) => {
+            return state.userCategory;
+        },
+        getUserDifficulty: (state: State) => {
+            return state.userDifficulty;
+        }
 
     },
 });

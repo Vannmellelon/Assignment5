@@ -19,6 +19,7 @@ const store = useStore();
 
 function funcClickQuestion(ans:string, que:Question) {
     store.commit("setUserAnswer", [ans, que.question]);
+    // TODO make unclickable/greyed out
 }
 </script>
 
@@ -28,12 +29,27 @@ function funcClickQuestion(ans:string, que:Question) {
             <p>{{question.question}}</p>
             <div id="all-buttons">
                 <div id="tf-buttons">
-                    <button class="answer" v-on:click="funcClickQuestion(question.correct_answer, question)" >{{question.correct_answer}}</button>
-                    <button class="answer" v-on:click="funcClickQuestion(question.incorrect_answers[0], question)">{{question.incorrect_answers[0]}}</button>
+                    <input type="radio" class="answer" name="{{question.question}}" 
+                        id="{{question.correct_answer}}" 
+                        v-on:click="funcClickQuestion(question.correct_answer, question)" >
+                    <label for="{{question.correct_answer}}">{{question.correct_answer}}</label>
+                    
+                    <input type="radio" class="answer" name="{{question.question}}" 
+                        id="{{question.incorrect_answers[0]}}" 
+                        v-on:click="funcClickQuestion(question.incorrect_answers[0], question)" >
+                    <label for="{{question.correct_answer}}">{{question.incorrect_answers[0]}}</label>                    
                 </div>
+                <!-- Only if multiple choice -->
                 <div v-if="question.type == 'multiple'">
-                    <button class="answer" v-on:click="funcClickQuestion(question.incorrect_answers[1], question)">{{question.incorrect_answers[1]}}</button>
-                    <button class="answer" v-on:click="funcClickQuestion(question.incorrect_answers[2], question)">{{question.incorrect_answers[2]}}</button>
+                    <input type="radio" class="answer" name="{{question.question}}" 
+                        id="{{question.incorrect_answers[1]}}" 
+                        v-on:click="funcClickQuestion(question.incorrect_answers[1], question)" >
+                    <label for="{{question.correct_answer}}">{{question.incorrect_answers[1]}}</label>
+
+                    <input type="radio" class="answer" name="{{question.question}}" 
+                        id="{{question.incorrect_answers[2]}}" 
+                        v-on:click="funcClickQuestion(question.incorrect_answers[2], question)" >
+                    <label for="{{question.correct_answer}}">{{question.incorrect_answers[2]}}</label> 
                 </div>
             </div>
         </div>
