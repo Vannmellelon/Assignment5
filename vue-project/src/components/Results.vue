@@ -30,8 +30,8 @@ const props = defineProps({
 <template>
     <div id="score-disp">
         <h1>Hi {{username}}! </h1>
-        <h1>Your previous high score: {{highScore}}</h1>
-        <h1>Your current score: {{score}}</h1>
+        <h2>Your previous high score: {{highScore}}</h2>
+        <h2>Your current score: {{score}}</h2>
     </div>
     <ul>
         <div id="question-container" v-for="question in props.questions">

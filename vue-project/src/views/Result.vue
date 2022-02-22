@@ -14,9 +14,6 @@ const username:ComputedRef<string> = computed(() => store.getters.getUsername);
 
 <template>
     <h1>RESULTS</h1>
-    <!-- <div v-for="question in questions">
-        <p> {{question.correct_answer}} </p>
-    </div> -->
     <Results 
     :questions="questions" 
     :score="score" 
