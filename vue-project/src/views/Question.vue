@@ -21,6 +21,8 @@ onMounted(async () => {
 });
 
 const updateHighScoreClick = async () => {
+    console.log("score", score.value);
+    console.log("userId", userId.value);
     const [error, user ] = await updateHighScore(score.value, userId.value);
     console.log("ERR", error)
     console.log("USER", user)
