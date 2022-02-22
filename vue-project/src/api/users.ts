@@ -41,8 +41,6 @@ export async function registrerUser(username: string, highScore: number) {
 	}
 }
 
-//const userId = 1;
-
 export async function updateHighScore(highScore: number, userId: number) {
     try {
         const config = {

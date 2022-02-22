@@ -3,7 +3,7 @@
 </style>
 
 <script setup lang="ts">
-import { ref, type PropType, type Ref } from "vue";
+import type { PropType } from "vue";
 import { useStore } from "vuex";
 import type { Question } from "../api/questions";
 
@@ -14,7 +14,6 @@ const props = defineProps({
     }
 });
 
-const userAnswer:Ref<String> = ref("");
 const store = useStore();
 
 function funcClickQuestion(ans:string, que:Question) {

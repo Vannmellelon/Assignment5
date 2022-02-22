@@ -1,16 +1,13 @@
-import type { StructuralDirectiveTransform } from "@vue/compiler-core";
 import type { InjectionKey } from "vue";
 import { createStore, useStore as baseUseStore, Store } from "vuex";
 import type { Category } from "./api/categories";
 import type { Question } from "./api/questions";
 import type { User } from "./api/users"
-import UserBarVue from "./components/UserBar.vue";
 
 export interface State {
     questions: Question[];
     categories: Category[];
     user: User;
-    //username: string;
     userCategory: string;
     userDifficulty: string;
 }
@@ -26,8 +23,6 @@ export default createStore({
             highScore: 0,
         },
         categories: [],
-        // is this necessary?
-        //username: "",
         userCategory: "",
         userDifficulty: "",
     }, 
