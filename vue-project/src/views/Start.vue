@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, type PropType, type Ref } from "vue";
+import { computed, onMounted, ref, type ComputedRef, type PropType, type Ref } from "vue";
 import { useStore } from "vuex";
 import { findAllCategories, type Category } from "../api/categories"; 
 import { getUser, type User, registrerUser, updateHighScore } from "../api/users";
@@ -7,7 +7,7 @@ import { getUser, type User, registrerUser, updateHighScore } from "../api/users
 
 // store
 const store = useStore();
-const categories:Category[] = computed(() => store.state.categories);
+const categories:ComputedRef<Category[]> = computed(() => store.state.categories);
 const error = ref<string | null>(null); 
 
 const username:Ref<string> = ref("");
