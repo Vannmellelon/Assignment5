@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, type ComputedRef, type PropType, type Ref } from "vue";
 import { useStore } from "vuex";
 import { findAllCategories, type Category } from "../api/categories"; 
-import { getUser, type User, registrerUser, updateHighScore } from "../api/users";
+import { getUser, registrerUser } from "../api/users";
 
 
 // store
@@ -38,7 +38,6 @@ const onLoginClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
     store.commit("setUsers", existsingUser);
 }
-
 
 // CCS stuff
 const isActive = () => {
