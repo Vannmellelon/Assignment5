@@ -70,7 +70,6 @@ const onChangeDifficulty = () => {
             <h1>Vilgeir & Annes Spectacular Quiz</h1>
         <form id="input-form">
             <input id="user-input" type="text" v-model="username" v-on:input="isActive" placeholder="Enter user" >
-            <button @click="updateHighScoreClick" type="button">registrer</button>
             <select id="category-select" v-model="userCategory" @change="onChangeCategory">
                     <option value="" selected disabled>Select a category</option>
                     <option v-for="category in categories">{{category.name}}</option>
