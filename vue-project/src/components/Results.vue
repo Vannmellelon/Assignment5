@@ -21,7 +21,7 @@ const props = defineProps({
 
 <template>
     <div id="score-disp">
-        <p>Your score: {{score}}</p>
+        <h1>Your score: {{score}}</h1>
     </div>
     <ul>
         <div id="question-container" v-for="question in props.questions">
