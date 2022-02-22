@@ -14,7 +14,6 @@ const error = ref<string | null>(null);
 const username:Ref<string> = ref("");
 const userCategory:Ref<string> = ref("");
 const userDifficulty:Ref<string> = ref("mixed");
-const displayError = ref("")
 
 
 onMounted(async () => {
@@ -32,15 +31,27 @@ onMounted(async () => {
 
 const onRegistrerClick = async () => {
     const [error, existsingUser ] = await getUser(username.value)
-    if (existsingUser) {
-        
-    } else {
-        const [error, existsingUser ] = await registrerUser(username.value, 0)
-        
-    }
-    console.log("ERR", error)
-    console.log("USER", user)
+    if (!existsingUser) {
+        const [error, newUser ] = await registrerUser(username.value, 0)
+    }    
+    onLoginClick()
 }
+
+const onLoginClick = async () => {
+    const [error, existsingUser ] = await getUser(username.value)
+    store.commit("setUsers", existsingUser);
+}
+
+/* const onRegistrerClick = async () => {
+    const [error, existsingUser ] = await getUser(username.value)
+    if (existsingUser) {
+        store.commit("setUsers", existsingUser);
+    } else {
+        const [error, newUser ] = await registrerUser(username.value, 0)
+        store.commit("setUsers", newUser);
+        console.log(newUser)
+    }
+} */
 
 const updateHighScoreClick = async () => {
     const [error, user ] = await updateHighScore(100, 1)
@@ -98,6 +109,6 @@ const ui: UserInput = {
             <Button id="play-button" @click="onRegistrerClick" type="button">Play Now
             </Button>
         </router-link>       
-    </div>
+        </div>
     </div>
 </template>

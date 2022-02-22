@@ -37,3 +37,11 @@
     content:"";
     background-color: #4CAF50;
 }
+
+#correct-answer {
+    background-color: #4CAF50;
+}
+
+.wrong-answer {
+    background-color: red;
+}
