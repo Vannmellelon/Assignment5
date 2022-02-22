@@ -1,9 +1,9 @@
 <style>
-  @import "./singleQuestion.css";
+  @import "./components.css";
 </style>
 
 <script setup lang="ts">
-import { ref, type PropType, type Ref } from "vue";
+import type { PropType } from "vue";
 import { useStore } from "vuex";
 import type { Question } from "../api/questions";
 
@@ -14,7 +14,6 @@ const props = defineProps({
     }
 });
 
-const userAnswer:Ref<String> = ref("");
 const store = useStore();
 
 function funcClickQuestion(ans:string, que:Question) {
@@ -26,8 +25,8 @@ function funcClickQuestion(ans:string, que:Question) {
 <template>
     <ul> 
         <div id="question-container" 
-        v-for="question in props.questions"
-        :key="question.question">
+            v-for="question in props.questions"
+            :key="question.question">
             <h2>{{question.question}}</h2>
             <div class="all-buttons" >
                 <div class="buttons" >    

@@ -2,7 +2,7 @@
 import { useStore } from 'vuex';
 import { computed, onMounted, ref, type ComputedRef } from "vue";
 import { findAllQuestions, type Question } from "../api/questions";
-import SingleQuestion from "../components/SingleQuestion.vue";
+import Questions from "../components/Questions.vue";
 
 // store greier
 const store = useStore();
@@ -16,12 +16,10 @@ onMounted(async () => {
     error.value = _error;
     console.log(error.value);
 });
-
-
 </script>
 
 <template>
-    <SingleQuestion :questions="questions" />
+    <Questions :questions="questions" />
     <router-link to="/results">
         <Button>Show results</Button>                
     </router-link>
