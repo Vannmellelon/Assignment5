@@ -13,8 +13,8 @@ export interface User {
 export async function getUser(username: string): Promise<[string | null, User | undefined]> {
 	try {
 		const { data } = await axios.get<User[]>(apiURL + "?username=" + username);
-		return [null, data.pop()]; // ??
-	} catch (error: any) {
+		return [null, data.pop()]; // pop returns undefined if array is empty
+	} catch (error:any) {
 		return [error.message, undefined];
 	}
 }
@@ -36,7 +36,7 @@ export async function registrerUser(username: string, highScore: number) {
 		const { data } = await response.json()
 		return [ null, data ]
 	}
-	catch(error) {
+	catch(error:any) {
 		return [error.message, null]
 	}
 }
@@ -59,7 +59,7 @@ export async function updateHighScore(highScore: number, userId: number) {
 		const { data } = await response.json()
 		return [ null, data ]
 	}
-	catch(error) {
+	catch(error:any) {
 		return [error.message, null]
 	}
 }

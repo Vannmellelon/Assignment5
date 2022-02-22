@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, type ComputedRef } from "vue";
 import { findAllQuestions, type Question } from "../api/questions";
 import SingleQuestion from "../components/SingleQuestion.vue";
 
 // store greier
 const store = useStore();
 
-const questions:Question[] = computed(() => store.state.questions);
+const questions:ComputedRef<Question[]> = computed(() => store.state.questions);
 const error = ref<string | null>(null); //???
 
 onMounted(async () => {
