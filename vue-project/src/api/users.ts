@@ -44,22 +44,22 @@ export async function registrerUser(username: string, highScore: number) {
 //const userId = 1;
 
 export async function updateHighScore(highScore: number, userId: number) {
-	try {
-		const config = {
-			method: "PATCH",
-			headers: {
-				"X-API-KEY": apiKey,
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				highScore: highScore
-			})
-		}
-		const response = await fetch(`https://new-cool-quiz.herokuapp.com/trivia/${userId}`, config)
-		const { data } = await response.json()
-		return [ null, data ]
-	}
-	catch(error:any) {
-		return [error.message, null]
-	}
+    try {
+        const config = {
+            method: "PATCH",
+            headers: {
+                "X-API-KEY": apiKey,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                highScore: highScore
+            })
+        }
+        const response = await fetch(`https://new-cool-quiz.herokuapp.com/trivia/${userId}`, config)
+        const { data } = await response.json()
+        return [ null, data ]
+    }
+    catch(error:any) {
+        return [error.message, null]
+    }
 }
