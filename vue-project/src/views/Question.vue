@@ -32,6 +32,6 @@ const updateHighScoreClick = async () => {
 <template>
     <Questions :questions="questions" />
     <router-link to="/results">
-        <Button @click="updateHighScoreClick">Show results</Button>                
+        <Button class="big-button" id="result-button" @click="updateHighScoreClick">Show results</Button>                
     </router-link>
 </template>

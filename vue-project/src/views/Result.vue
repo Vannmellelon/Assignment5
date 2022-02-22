@@ -16,7 +16,12 @@ const score:ComputedRef<number> = computed(() => store.getters.getScore);
         <p> {{question.correct_answer}} </p>
     </div> -->
     <Results :questions="questions" :score="score" />
-    <router-link to="/">
-        <Button>Try again!</Button>
-    </router-link>
+    <div id="result-buttons">
+        <router-link to="/questions">
+            <Button class="big-button" id="result-button">Play again</Button>
+        </router-link>
+        <router-link to="/">
+            <Button class="big-button" id="new-button">New player</Button>
+        </router-link>
+    </div>
 </template>

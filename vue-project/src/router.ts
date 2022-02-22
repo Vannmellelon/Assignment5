@@ -21,4 +21,8 @@ const routes: RouteRecordRaw[] = [
 export default createRouter({
     history: createWebHistory(),
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        // always scroll to top
+        return { top: 0 }
+    },
 })
