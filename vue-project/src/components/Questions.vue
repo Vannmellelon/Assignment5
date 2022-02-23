@@ -32,21 +32,21 @@ function funcClickQuestion(ans:string, que:Question) {
         <div id="question-container" 
             v-for="question in props.questions"
             :key="question.question">
-            <h2>{{question.question}}</h2>
+            <h2><span v-html="question.question"></span></h2>
             <div class="all-buttons" >
                 <div class="buttons" >    
                     <input class="answer-input" type="radio" :name="question.question"
                         :id="question.correct_answer + question.question" 
                         v-on:click="funcClickQuestion(question.correct_answer, question)" >
                     <label class="answer" :for="question.correct_answer + question.question">
-                        {{question.correct_answer}}
+                        <span v-html="question.correct_answer"></span>
                     </label>
                                
                     <input class="answer-input" type="radio" :name="question.question" 
                         :id="question.incorrect_answers[0] + question.question" 
                         v-on:click="funcClickQuestion(question.incorrect_answers[0], question)" >
                     <label class="answer" :for="question.incorrect_answers[0] + question.question">
-                        {{question.incorrect_answers[0]}}
+                        <span v-html="question.incorrect_answers[0]"></span>
                     </label>
                 </div>
                 <!-- Only if multiple choice -->
@@ -55,15 +55,13 @@ function funcClickQuestion(ans:string, que:Question) {
                         :id="question.incorrect_answers[1]" 
                         v-on:click="funcClickQuestion(question.incorrect_answers[1], question)" >
                     <label class="answer" :for="question.incorrect_answers[1]">
-                        {{question.incorrect_answers[1]}}
-                    </label>
+                        <span v-html="question.incorrect_answers[1]"></span>                    </label>
 
                     <input class="answer-input" type="radio" :name="question.question" 
                         :id="question.incorrect_answers[2]" 
                         v-on:click="funcClickQuestion(question.incorrect_answers[2], question)" >
                     <label class="answer" :for="question.incorrect_answers[2]">
-                        {{question.incorrect_answers[2]}}
-                    </label>
+                        <span v-html="question.incorrect_answers[2]"></span>                    </label>
                 </div>
             </div>
         </div>

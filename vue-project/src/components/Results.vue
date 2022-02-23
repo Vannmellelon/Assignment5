@@ -35,26 +35,23 @@ const props = defineProps({
     </div>
     <ul>
         <div id="question-container" v-for="question in props.questions">
-            <h2>{{question.question}}</h2>
+            <h2><span v-html="question.question"></span></h2>
             <div id="all-buttons">
                 <div id="tf-buttons">
                     <p class="results" 
                         id="correct-answer">
-                        {{question.correct_answer}}</p>
+                        <span v-html="question.correct_answer"></span></p>
                     <p class="results" 
                         v-bind:class="{'wrong-answer' : question.incorrect_answers[0] == question.userAnswer}">
-                        {{question.incorrect_answers[0]}}
-                    </p>
+                        <span v-html="question.incorrect_answers[0]"></span></p>
                 </div>
                 <div v-if="question.type == 'multiple'">
                     <p class="results" 
                         v-bind:class="{'wrong-answer' : question.incorrect_answers[1] == question.userAnswer}">
-                        {{question.incorrect_answers[1]}}
-                    </p>
+                        <span v-html="question.incorrect_answers[1]"></span></p>
                     <p class="results" 
                         v-bind:class="{'wrong-answer' : question.incorrect_answers[2] == question.userAnswer}">
-                        {{question.incorrect_answers[2]}}
-                    </p>
+                        <span v-html="question.incorrect_answers[2]"></span></p>
                 </div>
             </div>
         </div>
